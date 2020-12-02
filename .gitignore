@@ -2,5 +2,11 @@ ExpressMicro/Catalog/Catalog.API/obj
 ExpressMicro/Catalog/Catalog.API/bin
 ExpressMicro/Basket/Basket.API/obj
 ExpressMicro/Basket/Basket.API/bin
+ExpressMicro/src/Common/EventBusRabbitMQ/obj
+ExpressMicro/src/Common/EventBusRabbitMQ/bin
+ExpressMicro/obj
+ExpressMicro/bin
+ExpressMicro/ExpressMicro.sln
+ExpressMicro/IBasketContext.cs
 ExpressMicro/.vs
 ExpressMicro/obj

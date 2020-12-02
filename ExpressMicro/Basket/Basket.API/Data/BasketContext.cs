@@ -14,7 +14,5 @@ namespace Basket.API.Data
             Redis = redisConnection.GetDatabase();
         }
 
-
-
     }
 }
