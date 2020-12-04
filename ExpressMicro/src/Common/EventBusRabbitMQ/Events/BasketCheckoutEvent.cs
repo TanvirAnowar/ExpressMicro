@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace Basket.API.Entities
 {
-    public class BasketCheckout
+    public class BasketCheckoutEvent
     {
+        public Guid RequestId { get; set; }
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }
+
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

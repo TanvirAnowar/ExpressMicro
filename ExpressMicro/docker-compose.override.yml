@@ -13,11 +13,17 @@ services:
         restart: always
         ports:
             - "6379:6379"
+  rabbitmq:
+        container_name: rabbitmq
+        restart: always
+        ports:
+            - "5672:5672"
+            - "15672:15672"
   catalog.api:
         container_name: catalogapi
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "CatalogDatabaseSettings:ConnectionString=mongodb://catalogdb:27017"
+            - "CatalogDatabaseSettings:ConnectionString=mongodb://catalogdb:27017"            
         depends_on:
             - catalogdb
         volumes:
@@ -29,9 +35,11 @@ services:
         container_name: basketapi
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "CatalogDatabaseSettings:ConnectionString=Redis://basketdb:7379"
+            - "ConnectionStrings:Redis=basketdb:6379"
+            - "EventBus:HostName=rabbitmq"
         depends_on:
             - catalogdb
+            - rabbitmq
         volumes:
             - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
             - ${HOME}/.aspnet/https:/root/.aspnet/https/
