@@ -4,14 +4,6 @@ ExpressMicro/Basket/Basket.API/obj
 ExpressMicro/Basket/Basket.API/bin
 ExpressMicro/src/Common/EventBusRabbitMQ/obj
 ExpressMicro/src/Common/EventBusRabbitMQ/bin
-ExpressMicro/src/Ordering/Ordering.API/bin/
-ExpressMicro/src/Ordering/Ordering.API/obj/
-ExpressMicro/src/Ordering/Ordering.Application/bin/
-ExpressMicro/src/Ordering/Ordering.Application/obj/
-ExpressMicro/src/Ordering/Ordering.Core/bin/
-ExpressMicro/src/Ordering/Ordering.Core/obj/
-ExpressMicro/src/Ordering/Ordering.Infrastructure/bin/
-ExpressMicro/src/Ordering/Ordering.Infrastructure/obj/
 ExpressMicro/obj
 ExpressMicro/bin
 ExpressMicro/ExpressMicro.sln
