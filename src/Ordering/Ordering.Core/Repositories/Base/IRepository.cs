@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.Core.Entities.Repositories.Base
+namespace Ordering.Core.Repositories.Base
 {
     public interface IRepository<T> where T: Entity
     {

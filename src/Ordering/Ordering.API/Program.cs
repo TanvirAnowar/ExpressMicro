@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ordering.Infrastructure.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ordering.API
 {
@@ -25,25 +21,23 @@ namespace Ordering.API
 
         private static void CreateAddSeedDatabase(IHost host)
         {
-            using (var scope = host.Services.CreateScope())
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+
+            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+            try
             {
-                var services = scope.ServiceProvider;
+                var orderContext = services.GetRequiredService<OrderContext>();
 
-                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-
-                try
-                {
-                    var orderContext = services.GetRequiredService<OrderContext>();
-
-                    OrderContextSeed.SeedData(orderContext, loggerFactory);
+                OrderContextSeed.SeedData(orderContext, loggerFactory);
 
 
-                }catch(Exception ex)
-                {
-                    var logger = loggerFactory.CreateLogger<Program>();
+            }catch(Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
 
-                    logger.LogError(ex.Message);
-                }
+                logger.LogError(ex.Message);
             }
         }
 

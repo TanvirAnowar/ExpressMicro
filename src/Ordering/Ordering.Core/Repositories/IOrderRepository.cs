@@ -1,10 +1,11 @@
-﻿using Ordering.Core.Entities.Repositories.Base;
+﻿using Ordering.Core.Repositories.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Ordering.Core.Entities;
 
-namespace Ordering.Core.Entities.Repositories
+namespace Ordering.Core.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
