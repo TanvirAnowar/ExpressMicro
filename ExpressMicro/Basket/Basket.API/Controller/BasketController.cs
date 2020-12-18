@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using EventBusRabbitMQ.Events;
 
 namespace Basket.API.Controller
 {

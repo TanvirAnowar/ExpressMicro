@@ -1,9 +1,9 @@
-﻿using Basket.API.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EventBusRabbitMQ.Events;
 
 namespace EventBusRabbitMQ.Producer
 {
