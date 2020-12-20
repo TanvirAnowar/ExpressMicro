@@ -11,9 +11,12 @@ using Ordering.Core.Repositories;
 using Ordering.Core.Repositories.Base;
 using Ordering.Infrastructure.Data;
 using System.Reflection;
+using EventBusRabbitMQ;
+using EventBusRabbitMQ.Producer;
 using Microsoft.OpenApi.Models;
 using Ordering.Infrastructure.Repositories;
 using Ordering.Infrastructure.Repositories.Base;
+using RabbitMQ.Client;
 
 namespace Ordering.API
 {
@@ -38,7 +41,24 @@ namespace Ordering.API
 
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddSingleton<IRabbitMQConnection>(sp => {
+
+                var factory = new ConnectionFactory()
+                {
+                    HostName = Configuration["EventBus:Hostname"],
+                    UserName = Configuration["EventBus:UserName"],
+                    Password = Configuration["EventBus:Password"]
+                };
+
+                return new RabbitMQConnection(factory);
+
+            });
+
+            services.AddSingleton<EventBusRabbitMQProducer>();
+
             services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
+
+
 
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
