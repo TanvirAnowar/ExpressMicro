@@ -1,9 +1,7 @@
-﻿using Ordering.Core.Repositories.Base;
-using System;
+﻿using Ordering.Core.Entities;
+using Ordering.Core.Repositories.Base;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Ordering.Core.Entities;
 
 namespace Ordering.Core.Repositories
 {

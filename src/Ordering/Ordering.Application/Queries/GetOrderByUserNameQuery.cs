@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using MediatR;
+﻿using MediatR;
 using Ordering.Application.Responses;
+using System;
+using System.Collections.Generic;
 
 namespace Ordering.Application.Queries
 {
@@ -12,7 +12,6 @@ namespace Ordering.Application.Queries
         public GetOrderByUserNameQuery(string userName)
         {
             UserName = userName ?? throw new ArgumentNullException(nameof(userName));
-
         }
     }
 }

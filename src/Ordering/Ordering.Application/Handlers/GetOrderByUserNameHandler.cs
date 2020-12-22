@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Ordering.Application.Mapper;
 using Ordering.Application.Queries;
 using Ordering.Application.Responses;
 using Ordering.Core.Repositories;
@@ -6,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Ordering.Application.Mapper;
-
 
 namespace Ordering.Application.Handlers
 {
@@ -23,10 +22,9 @@ namespace Ordering.Application.Handlers
         public async Task<IEnumerable<OrderResponse>> Handle(GetOrderByUserNameQuery request, CancellationToken cancellationToken)
         {
             var orderList = await _orderRepository.GetOrdersByUserName(request.UserName);
-
+            
             var orderResponseList = OrderMapper.Mapper.Map<IEnumerable<OrderResponse>>(orderList);
             return orderResponseList;
         }
-
-    }
+    }    
 }

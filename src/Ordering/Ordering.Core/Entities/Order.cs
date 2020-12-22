@@ -1,7 +1,4 @@
 ﻿using Ordering.Core.Entities.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ordering.Core.Entities
 {
@@ -10,6 +7,7 @@ namespace Ordering.Core.Entities
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }
 
+        // BillingAddress
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
@@ -23,6 +21,13 @@ namespace Ordering.Core.Entities
         public string CardNumber { get; set; }
         public string Expiration { get; set; }
         public string CVV { get; set; }
-        public int PaymentMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
+    }
+
+    public enum PaymentMethod
+    {
+        CreditCard = 1,
+        DebitCard = 2,
+        Paypal = 3
     }
 }
