@@ -1,9 +1,9 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ordering.Infrastructure.Data;
-using System;
 
 namespace Ordering.API
 {
@@ -11,34 +11,9 @@ namespace Ordering.API
     {
         public static void Main(string[] args)
         {
-           var host = CreateHostBuilder(args).Build();
-
-            CreateAddSeedDatabase(host);
-
-            host.Run();
-
-        }
-
-        private static void CreateAddSeedDatabase(IHost host)
-        {
-            using var scope = host.Services.CreateScope();
-            var services = scope.ServiceProvider;
-
-            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-
-            try
-            {
-                var orderContext = services.GetRequiredService<OrderContext>();
-
-                OrderContextSeed.SeedData(orderContext, loggerFactory);
-
-
-            }catch(Exception ex)
-            {
-                var logger = loggerFactory.CreateLogger<Program>();
-
-                logger.LogError(ex.Message);
-            }
+            var host = CreateHostBuilder(args).Build();
+            CreateAndSeedDatabase(host);
+            host.Run();            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -47,5 +22,25 @@ namespace Ordering.API
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void CreateAndSeedDatabase(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+                try
+                {
+                    var aspnetRunContext = services.GetRequiredService<OrderContext>();
+                    OrderContextSeed.SeedAsync(aspnetRunContext, loggerFactory).Wait();
+                }
+                catch (Exception exception)
+                {
+                    var logger = loggerFactory.CreateLogger<Program>();
+                    logger.LogError(exception, "An error occurred seeding the DB.");
+                }
+            }
+        }
     }
 }
